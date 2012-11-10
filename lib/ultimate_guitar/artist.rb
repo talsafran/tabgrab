@@ -11,15 +11,15 @@ module UltimateGuitar
 
     def tabs
       doc = Nokogiri::HTML(open(url))
-      doc.css("a:regex('#{url}.*htm')", TabLinkMatcher.new).map do |link|
-        link.attr(:href)
-      end
+      doc.css("a:regex('#{url}.*htm')", TabLinkMatcher.new).map(&:attr('href')) #do |link|
+      #   link.attr(:href)
+      # end
     end
-  end
 
-  class TabLinkMatcher
-    def regex(node_set, regex)
-      node_set.find_all { |node| node['href'] =~ /#{regex}/ }
+    class TabLinkMatcher
+      def regex(node_set, regex)
+        node_set.find_all { |node| node['href'] =~ /#{regex}/ }
+      end
     end
   end
 end
