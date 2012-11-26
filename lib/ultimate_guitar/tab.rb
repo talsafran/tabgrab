@@ -1,6 +1,3 @@
-require 'nokogiri'
-require 'open-uri'
-
 module UltimateGuitar
   class Tab
     attr_accessor :url
@@ -9,9 +6,11 @@ module UltimateGuitar
       self.url = url
     end
 
-    def html
-      doc = Nokogiri::HTML(open(url))
-      doc.css('pre').last
+    def text
+      Logger.log("Fetching tab #{url}...")
+
+      page = Nokogiri::HTML(open(url))
+      page.css('pre').last
     end
   end
 end
