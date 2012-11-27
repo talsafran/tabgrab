@@ -12,11 +12,7 @@ module UltimateGuitar
     end
 
     def url
-      if @page == 1
-        "http://www.ultimate-guitar.com/bands/#{@letter}.htm"
-      else
-        "http://www.ultimate-guitar.com/bands/#{@letter}#{@page}.htm"
-      end
+      "http://www.ultimate-guitar.com/bands/#{@letter}#{@page if @page > 1}.htm"
     end
 
     protected
