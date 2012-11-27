@@ -26,7 +26,7 @@ module UltimateGuitar
 
       document = Nokogiri::HTML(open(url))
       document.css("td a:regex('^/tabs/.*_tabs.htm')", RegexLinkMatcher.new).map do |link|
-        UltimateGuitar::Artist.new("http://ultimate-guitar.com#{link.attr(:href)}")
+        Artist.new("http://ultimate-guitar.com#{link.attr(:href)}")
       end
     end
   end

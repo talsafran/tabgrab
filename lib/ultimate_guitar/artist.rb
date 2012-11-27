@@ -23,7 +23,7 @@ module UltimateGuitar
 
       page = Nokogiri::HTML(open("#{url}?no_takeover"))
       page.css("a:regex('#{tab_path}.*htm')", RegexLinkMatcher.new).map do |link|
-        UltimateGuitar::Tab.new(link.attr(:href))
+        Tab.new(link.attr(:href))
       end
     end
   end
