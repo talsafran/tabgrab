@@ -1,23 +1,14 @@
 module UltimateGuitar
-  class ArtistsIndex
+  class ArtistLetterPage
     attr_reader :letter, :page
 
     def initialize(letter, page = 1)
-      @letter = letter.downcase
+      @letter = letter
       @page = page
-    end
-
-    def document
-      @document ||= Nokogiri::HTML(open(url))
     end
 
     def artists
       @artists ||= fetch_artists
-    end
-
-    def pages
-      count = document.css("td b a:regex('^/bands/#{@letter}.*.htm')", RegexLinkMatcher.new).count
-      count -= @page == 1 ? 0 : 1
     end
 
     def url
@@ -33,6 +24,7 @@ module UltimateGuitar
     def fetch_artists
       Logger.log("Fetching artist index #{url}...")
 
+      document = Nokogiri::HTML(open(url))
       document.css("td a:regex('^/tabs/.*_tabs.htm')", RegexLinkMatcher.new).map do |link|
         UltimateGuitar::Artist.new("http://ultimate-guitar.com#{link.attr(:href)}")
       end
