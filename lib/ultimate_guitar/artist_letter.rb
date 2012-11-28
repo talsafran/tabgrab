@@ -15,6 +15,10 @@ module UltimateGuitar
           end
     end
 
+    def artists
+      pages.map(&:artists).flatten
+    end
+
     def url
       "http://www.ultimate-guitar.com/bands/#{@letter}.htm"
     end
