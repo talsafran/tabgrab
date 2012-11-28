@@ -1,30 +1,28 @@
 
 module UltimateGuitar
   class Artist
-    attr_accessor :url, :name, :tabs
+    attr_reader :url, :pages
 
     def initialize(url)
       @url = url
     end
 
     def tabs
-      @tabs ||= fetch_tabs
+      pages.map(&:tabs).flatten
     end
 
-    protected
+    def pages
+      @pages ||=
+        Nokogiri::HTML(open("#{url}?no_takeover"))
+          .css("td b a:regex('^/tabs/.*_tabs.*\.htm$')", RegexLinkMatcher.new)
+          .each_with_index.map do |item, index|
+            ArtistPage.new(self, index + 1)
+          end
+    end
 
     def tab_path
       # http://www.ultimate-guitar.com/tabs/bob_dylan_tabs.htm -> b/bob_dylan
-      url.gsub(/(.*)tabs\/(.)(.*)_tabs\.htm/, '\2/\2\3')
-    end
-
-    def fetch_tabs
-      Logger.log("Fetching tabs for artist #{url}...")
-
-      page = Nokogiri::HTML(open("#{url}?no_takeover"))
-      page.css("a:regex('#{tab_path}.*htm')", RegexLinkMatcher.new).map do |link|
-        Tab.new(link.attr(:href))
-      end
+      url.gsub(/(.*)tabs\/(.)(.*)_tabs\d*\.htm/, '\2/\2\3')
     end
   end
 end
