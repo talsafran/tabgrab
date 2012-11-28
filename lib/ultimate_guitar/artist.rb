@@ -12,12 +12,11 @@ module UltimateGuitar
     end
 
     def pages
-      @pages ||=
-        Nokogiri::HTML(open("#{url}?no_takeover"))
-          .css("td b a:regex('^/tabs/.*_tabs.*\.htm$')", RegexLinkMatcher.new)
-          .each_with_index.map do |item, index|
-            ArtistPage.new(self, index + 1)
-          end
+      @pages ||= Nokogiri::HTML(open("#{url}?no_takeover"))
+        .css("td b a:regex('^/tabs/.*_tabs.*\.htm$')", RegexLinkMatcher.new)
+        .each_with_index.map do |item, index|
+          ArtistPage.new(self, index + 1)
+        end
     end
 
     def tab_path
