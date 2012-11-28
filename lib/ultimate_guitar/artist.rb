@@ -17,6 +17,8 @@ module UltimateGuitar
         .each_with_index.map do |item, index|
           ArtistPage.new(self, index + 1)
         end
+      @pages = [ArtistPage.new(self, 1)] if @pages.empty?
+      @pages
     end
 
     def tab_path
