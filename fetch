@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require './lib/ultimate_guitar'
+require 'yaml'
+
+include UltimateGuitar
+
+letter = ArtistLetter.new(ARGV[0])
+tabs = letter.artists.map(&:tabs).flatten
+
+Logger.log("Found #{tabs.count} tabs.")
+Logger.log("Saving YAML dump.")
+File.open("dumps/#{ARGV[0]}.yml", 'w') { |f| f.write(tabs.to_yaml) }
