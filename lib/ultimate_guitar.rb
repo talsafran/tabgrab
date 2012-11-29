@@ -1,7 +1,8 @@
 require 'nokogiri'
 require 'open-uri'
 
-Dir.glob(File.dirname(File.absolute_path(__FILE__)) + '/*/*') { |f| require f }
+Dir.glob(File.dirname(File.absolute_path(__FILE__)) + '/ultimate_guitar/*') { |f| require f }
+Dir.glob(File.dirname(File.absolute_path(__FILE__)) + '/../helpers/*') { |f| require f }
 
 module UltimateGuitar
   def fetch_with_regex(url, regex)
