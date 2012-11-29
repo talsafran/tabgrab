@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require './lib/ultimate_guitar'
+require 'irb'
+require 'irb/completion'
+
+include UltimateGuitar
+
+IRB.start
