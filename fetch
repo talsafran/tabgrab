@@ -10,4 +10,4 @@ tabs = letter.artists.map(&:tabs).flatten
 
 Logger.log("Found #{tabs.count} tabs.")
 Logger.log("Saving YAML dump.")
-File.open("dumps/#{ARGV[0]}.yml", 'w') { |f| f.write(tabs.to_yaml) }
+File.open("log/dumps/#{ARGV[0]}.yml", 'w') { |f| f.write(tabs.to_yaml) }
