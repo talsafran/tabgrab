@@ -7,12 +7,10 @@ module UltimateGuitar
     end
 
     def pages
-      @pages ||=
-        Nokogiri::HTML(open(url))
-          .css("td b a:regex('^/bands/#{@letter}.*.htm')", RegexLinkMatcher.new)
-          .each_with_index.map do |item, index|
-            ArtistLetterPage.new(@letter, index + 1)
-          end
+      @pages ||= fetch_with_regex(url, "td b a:regex('^/bands/#{@letter}.*.htm')")
+        .each_with_index.map do |item, index|
+          ArtistLetterPage.new(@letter, index + 1)
+        end
     end
 
     def artists

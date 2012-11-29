@@ -18,10 +18,7 @@ module UltimateGuitar
     protected
 
     def fetch_tabs
-      Logger.log("Fetching tabs for artist #{url}...")
-
-      doc = Nokogiri::HTML(open("#{url}?no_takeover"))
-      doc.css("a:regex('/#{@artist.tab_path}.*htm')", RegexLinkMatcher.new).map do |link|
+      fetch_with_regex("#{url}?no_takeover", "a:regex('/#{@artist.tab_path}.*htm')").map do |link|
         Tab.new(link.attr(:href))
       end
     end

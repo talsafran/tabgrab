@@ -12,8 +12,7 @@ module UltimateGuitar
     end
 
     def pages
-      @pages ||= Nokogiri::HTML(open("#{url}?no_takeover"))
-        .css("td b a:regex('^/tabs/.*_tabs.*\.htm$')", RegexLinkMatcher.new)
+      @pages ||= fetch_with_regex("#{url}?no_takeover", "td b a:regex('^/tabs/.*_tabs.*\.htm$')")
         .each_with_index.map do |item, index|
           ArtistPage.new(self, index + 1)
         end

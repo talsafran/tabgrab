@@ -13,10 +13,7 @@ module UltimateGuitar
     protected
 
     def fetch_text
-      Logger.log("Fetching tab #{url}...")
-
-      page = Nokogiri::HTML(open(url))
-      page.css('pre').last || ''
+      fetch(url).css('pre').last || ''
     end
   end
 end

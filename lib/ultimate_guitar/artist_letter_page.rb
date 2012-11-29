@@ -18,10 +18,7 @@ module UltimateGuitar
     protected
 
     def fetch_artists
-      Logger.log("Fetching artist index #{url}...")
-
-      doc = Nokogiri::HTML(open(url))
-      doc.css("td a:regex('^/tabs/.*_tabs.htm')", RegexLinkMatcher.new).map do |link|
+      fetch_with_regex(url, "td a:regex('^/tabs/.*_tabs.htm')").map do |link|
         Artist.new("http://ultimate-guitar.com#{link.attr(:href)}")
       end
     end
