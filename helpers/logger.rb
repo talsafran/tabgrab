@@ -3,7 +3,7 @@ module Logger
 
   class << self
     def log(text)
-      puts("[#{self.class}] #{text}") if @display_logging
+      puts(text) if @display_logging
     end
   end
 end
