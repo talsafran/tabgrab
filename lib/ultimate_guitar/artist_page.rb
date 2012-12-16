@@ -18,7 +18,7 @@ module UltimateGuitar
     protected
 
     def fetch_tabs
-      fetch_with_regex("#{url}?no_takeover", "a:regex('/#{@artist.tab_path}.*htm')").map do |link|
+      UltimateGuitar::fetch_with_regex("#{url}?no_takeover", "a:regex('/#{@artist.tab_path}.*htm')").map do |link|
         Tab.new(link.attr(:href))
       end
     end

@@ -18,7 +18,7 @@ module UltimateGuitar
     protected
 
     def fetch_artists
-      fetch_with_regex(url, "td a:regex('^/tabs/.*_tabs.htm')").map do |link|
+      UltimateGuitar::fetch_with_regex(url, "td a:regex('^/tabs/.*_tabs.htm')").map do |link|
         Artist.new("http://ultimate-guitar.com#{link.attr(:href)}")
       end
     end

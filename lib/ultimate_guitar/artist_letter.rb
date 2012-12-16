@@ -7,7 +7,7 @@ module UltimateGuitar
     end
 
     def pages
-      @pages ||= fetch_with_regex(url, "td b a:regex('^/bands/#{@letter}.*.htm')")
+      @pages ||= UltimateGuitar::fetch_with_regex(url, "td b a:regex('^/bands/#{@letter}.*.htm')")
         .each_with_index.map do |item, index|
           ArtistLetterPage.new(@letter, index + 1)
         end

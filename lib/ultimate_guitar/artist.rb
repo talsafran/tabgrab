@@ -1,4 +1,3 @@
-
 module UltimateGuitar
   class Artist
     attr_reader :url, :pages
@@ -12,7 +11,7 @@ module UltimateGuitar
     end
 
     def pages
-      @pages ||= fetch_with_regex("#{url}?no_takeover", "td b a:regex('^/tabs/.*_tabs.*\.htm$')")
+      @pages ||= UltimateGuitar::fetch_with_regex("#{url}?no_takeover", "td b a:regex('^/tabs/.*_tabs.*\.htm$')")
         .each_with_index.map do |item, index|
           ArtistPage.new(self, index + 1)
         end
