@@ -14,6 +14,6 @@ Gem::Specification.new do |gem|
   gem.author      = 'Tal Safran'
   gem.license     = 'MIT'
 
-  gem.files = %x{ git ls-files }.split("\n").select { |d| d =~ %r{^(License|README|bin/|data/|ext/|lib/|spec/|test/)} }
+  gem.files = %x{ git ls-files }.split("\n").select { |d| d =~ %r{^(License|README|bin/|data/|ext/|lib/|helpers/|spec/|test/)} }
   gem.add_dependency 'nokogiri'
 end
