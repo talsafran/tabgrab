@@ -6,7 +6,12 @@ Dir.glob(File.dirname(File.absolute_path(__FILE__)) + '/../helpers/*') { |f| req
 
 module UltimateGuitar
   def fetch_with_regex(url, regex)
-    fetch(url).css(regex, RegexLinkMatcher.new)
+    begin
+      fetch(url).css(regex, RegexLinkMatcher.new)
+    rescue Exception => e
+      Logger.log("Couldn't get #{url} - #{e.message}")
+      []
+    end
   end
 
   def fetch(url)
@@ -16,7 +21,6 @@ module UltimateGuitar
       Nokogiri::HTML(open(url))
     rescue Exception => e
       Logger.log("Couldn't get #{url} - #{e.message}")
-      []
     end
   end
 end
