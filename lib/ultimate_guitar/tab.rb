@@ -13,7 +13,8 @@ module UltimateGuitar
     protected
 
     def fetch_text
-      UltimateGuitar::fetch(url).css('pre').last || ''
+      tab_text = UltimateGuitar::fetch(url).css('pre').last
+      tab_text ? tab_text.text : ''
     end
   end
 end

@@ -30,6 +30,7 @@ module UltimateGuitar
         Nokogiri::HTML(open(url))
       rescue Exception => e
         UltimateGuitar::Logger.log("Couldn't get #{url} - #{e.message}")
+        Nokogiri::HTML::Document.new
       end
     end
   end
