@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require './lib/ultimate_guitar'
+require 'yaml'
+
+file = File.open("log/dumps/#{ARGV[0]}.yml")
+
+artists = YAML::load(file)
+artists.map do |artist|
+  artist.tabs.map(&:text)
+  artist.tabs
+end
+
+UltimateGuitar::Logger.log("Saving YAML dump.")
+File.open("log/dumps/full-dumps/#{ARGV[0]}.yml", 'w') { |f| f.write(artists.to_yaml) }
