@@ -1,6 +1,6 @@
 module UltimateGuitar
   class Tab
-    attr_accessor :url, :text
+    attr_reader :url, :text
 
     def initialize(url)
       @url = url
