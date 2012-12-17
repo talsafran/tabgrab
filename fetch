@@ -3,11 +3,9 @@
 require './lib/ultimate_guitar'
 require 'yaml'
 
-include UltimateGuitar
-
-letter = ArtistLetter.new(ARGV[0])
+letter = UltimateGuitar::ArtistLetter.new(ARGV[0])
 tabs = letter.artists.map(&:tabs)
 
-Logger.log("Found #{tabs.flatten.count} tabs.")
-Logger.log("Saving YAML dump.")
+UltimateGuitar::Logger.log("Found #{tabs.flatten.count} tabs.")
+UltimateGuitar::Logger.log("Saving YAML dump.")
 File.open("log/dumps/#{ARGV[0]}.yml", 'w') { |f| f.write(letter.artists.to_yaml) }
